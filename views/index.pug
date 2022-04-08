@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p Keep smiling, because life is a beautiful thing and there's so much to smile about.
+  button(type='button', class='btn btn-primary' onClick="moreClaps()") PressMe
+  div(id ='target') Clap for me
+  
+  script.
+      var clap_count = 0;
+      function moreClaps(){
+        clap_count = clap_count + 2;
+        document.getElementById("target").innerHTML = 'Clap '+ clap_count +' times';
+      }
+
+  - var icecreams= ['Rose_Color','Breed_Variety','Rose_Price'] 
+  a(href='/rose') Click here to search for rose

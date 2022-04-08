@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  -
+    let results = [
+          {
+             "Rose_Color": "Black",
+             "Breed_Variety": "Wild Rose",
+             "Rose_Price": 50
+          },
+          {
+             "Rose_Color": "Red",
+             "Breed_Variety": "Climbing Roses",
+             "Rose_Price": 30
+          },
+          {
+             "Rose_Color": "Blue",
+             "Breed_Variety": "Shrub Rose",
+             "Rose_Price": 40
+          },                   
+      ]
+
+  div(class= "container-fluid")
+    div(class = "row")  
+      each item,index in results
+        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.Rose_Color}
+        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.Breed_Variety}
+        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.Rose_Price}
+
+  script.
+    function buy(itemNum){
+      alert(`You purchased item ${itemNum+1}`)
+    }
