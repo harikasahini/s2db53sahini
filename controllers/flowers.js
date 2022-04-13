@@ -1,8 +1,15 @@
 var flower = require('../models/flowers');
 // List of all Costumes
-exports.flower_list = function(req, res) {
- res.send('NOT IMPLEMENTED: Flower list');
-};
+exports.flower_list = async function(req, res) {
+    try{
+    theflower = await flower.find();
+    res.send(theflower);
+    }
+    catch(err){
+    res.error(500,`{"error": ${err}}`);
+    res.status(500);
+    }
+    };
 // for a specific Costume.
 exports.flower_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: Flower detail: ' + req.params.id);
@@ -19,3 +26,4 @@ exports.flower_delete = function(req, res) {
 exports.flower_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: Flower update PUT' + req.params.id);
 };
+
