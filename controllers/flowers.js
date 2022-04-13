@@ -1,5 +1,5 @@
 var flower = require('../models/flowers');
-// List of all Costumes
+// List of all flower
 exports.flower_list = async function(req, res) {
     try{
     theflower = await flower.find();
@@ -26,4 +26,15 @@ exports.flower_delete = function(req, res) {
 exports.flower_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: Flower update PUT' + req.params.id);
 };
-
+// VIEWS
+// Handle a show all view
+exports.flower_view_all_Page = async function(req, res) {
+    try{
+    theflower = await flower.find();
+    res.render('flowers', { title: 'Flower Search Results', results: theflower });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
