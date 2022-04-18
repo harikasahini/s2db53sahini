@@ -1,0 +1,23 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let flowerid = toShow._id 
+  - let flower_type = toShow.flower_type 
+  - let flowercost = toShow.cost 
+  - let flowersize = toShow.size 
+  div 
+    div.row 
+      div(class='flowerAttr mr-3') flower ID is: 
+      div #{flowerid} 
+    div.row 
+      div(class='flowerAttr mr-3') flower Type is: 
+      div #{flower_type} 
+    div.row 
+      div(class='flowerAttr mr-3') flower Size is: 
+      div #{flowersize} 
+    div.row 
+      div(class='flowerAttr mr-3') flower Cost is: 
+      div #{flowercost}
+

@@ -10,10 +10,6 @@ exports.flower_list = async function(req, res) {
     res.status(500);
     }
     };
-// for a specific flower.
-exports.flower_detail = function(req, res) {
- res.send('NOT IMPLEMENTED: Flower detail: ' + req.params.id);
-};
 // Handle flower create on POST.
 exports.flower_create_post = async function(req, res) {
     console.log(req.body)
@@ -31,8 +27,17 @@ exports.flower_create_post = async function(req, res) {
     } 
 };
 // Handle flower delete form on DELETE.
-exports.flower_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Flower delete DELETE ' + req.params.id);
+exports.flower_delete =async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await flower.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   
 };
 // // Handle flower update form on PUT.
 // exports.flower_update_put = function(req, res) {
@@ -82,4 +87,60 @@ ${JSON.stringify(req.body)}`)
  res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
  }
+};
+
+// Handle a show one view with id specified by query
+exports.flower_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await flower.findById( req.query.id)
+    res.render('flowerdetail',
+   { title: 'Flower Details', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+// Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.flower_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('flowercreate', { title: 'flower Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };   
+
+   // Handle building the view for updating a costume.
+// query provides the id
+exports.flower_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await flower.findById(req.query.id)
+    res.render('flowerupdate', { title: 'flower Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   // Handle a delete one view with id from query
+exports.flower_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await flower.findById(req.query.id)
+    res.render('flowerdelete', { title: 'flower Delete', toShow:
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
 };
