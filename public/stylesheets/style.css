@@ -1,6 +1,8 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: blanchedalmond;
+  text-shadow: 12em;
 }
 
 a {
@@ -8,6 +10,15 @@ a {
 }
 
 .flowerAttr {
-  background-color:rosybrown;
+  border-style: dotted;
+  background-color:darkkhaki;
+  text-align: center;
   width: 120px;
+ }
+ 
+ h1 {
+   background-color:darkorange;
+   border-style: dashed;
+   font-family: cursive;
+   text-align: center;
  }
