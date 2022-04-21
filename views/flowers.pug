@@ -2,27 +2,28 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
-  - let result= results
-
-  div(class= "container-fluid")
-    div(class = "row")  
-      each item,index in result
-        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.flower_type}
-        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.size}
-        div(class= "col-sm-2", onclick=`buy(${index})`) #{item.cost}
-      each flower in result
+  - let flowers=results
+  div(class="container-fluid")
+  div(class="row m-1")
+    each flower in flowers
       - let destinationupdate = `dispatch(\"/flowers/update?id=${flower._id}\")`
       - let destinationcreate = `dispatchCreate(\"/flowers/create\")`
       - let destinationdelete = `dispatchDelete(\"/flowers/delete?id=${flower._id}\")`
-        div(class="col-sm-4  btn btn-light") #{flower.flower_type} - #{flower.size} - #{flower.cost} 
+        div(class="col-ml-1 btn btn-light") #{flower.flower_type} - #{flower.cost} - #{flower.size} 
           button.btn( class="btn-primary ml-1", onclick= destinationcreate) Create
           button.btn( class="btn-info ml-1", onclick= destinationupdate) Update
           button.btn( class="btn-danger ml-1", onclick= destinationdelete) Delete
   script.
-    function buy(itemNum){
-      alert(`You purchased item ${itemNum+1}`)
-    }
-    function dispatch(path){
+      function dispatch(path){
       window.location.href=path
-    }
+      }
+      function buy(itemNo)
+      {
+        alert(`You purchased Item ${itemNo+1}`)
+      }
+      function dispatchCreate(path){
+        window.location.href=path
+      }
+      function dispatchDelete(path){
+        window.location.href=path
+      }
