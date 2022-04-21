@@ -11,8 +11,18 @@ block content
         div(class= "col-sm-2", onclick=`buy(${index})`) #{item.flower_type}
         div(class= "col-sm-2", onclick=`buy(${index})`) #{item.size}
         div(class= "col-sm-2", onclick=`buy(${index})`) #{item.cost}
-
+      each flower in result
+      - let destinationupdate = `dispatch(\"/flowers/update?id=${flower._id}\")`
+      - let destinationcreate = `dispatchCreate(\"/flowers/create\")`
+      - let destinationdelete = `dispatchDelete(\"/flowers/delete?id=${flower._id}\")`
+        div(class="col-sm-4  btn btn-light") #{flower.flower_type} - #{flower.size} - #{flower.cost} 
+          button.btn( class="btn-primary ml-1", onclick= destinationcreate) Create
+          button.btn( class="btn-info ml-1", onclick= destinationupdate) Update
+          button.btn( class="btn-danger ml-1", onclick= destinationdelete) Delete
   script.
     function buy(itemNum){
       alert(`You purchased item ${itemNum+1}`)
+    }
+    function dispatch(path){
+      window.location.href=path
     }
