@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title
+  button.btn( class="btn-primary ml-1", onclick= destinationcreate) Create
   - let flowers=results
   div(class="container-fluid")
   div(class="row m-1")
@@ -9,9 +10,12 @@ block content
       - let destinationupdate = `dispatch(\"/flowers/update?id=${flower._id}\")`
       - let destinationcreate = `dispatchCreate(\"/flowers/create\")`
       - let destinationdelete = `dispatchDelete(\"/flowers/delete?id=${flower._id}\")`
-        div(class="col-ml-1 btn btn-light") #{flower.flower_type} - #{flower.cost} - #{flower.size} 
-          button.btn( class="btn-primary ml-1", onclick= destinationcreate) Create
+      - let destinationdetail = `dispatch(\"/flowers/detail/?id=${flower._id}\")`
+      div(class="col-ml-1 btn btn-light") #{flower.flower_type} - #{flower.cost} - #{flower.size}
+          button.btn( class="btn-secondary ml-1", onclick= destinationdetail) Details 
+
           button.btn( class="btn-info ml-1", onclick= destinationupdate) Update
+
           button.btn( class="btn-danger ml-1", onclick= destinationdelete) Delete
   script.
       function dispatch(path){
